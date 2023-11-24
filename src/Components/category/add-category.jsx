@@ -1,3 +1,5 @@
+import Result from "postcss/lib/result";
+import { object } from "prop-types";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -6,13 +8,16 @@ export default function AddCategory() {
   const [preview, setPreview] = useState(null);
   const [preview2, setPreview2] = useState(null);
   const navigate = useNavigate();
+  const reader = new FileReader();
+  const reader2 = new FileReader();
 
   useEffect(() => {
     if (addCategory) {
       console.log(addCategory);
       fetch(`${import.meta.env.VITE_ADDR_API}/category/add`, {
         method: "POST",
-        body: addCategory,
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(addCategory),
       })
         .then((res) => res.json())
         .then((res) => alert(res.message));
@@ -26,24 +31,33 @@ export default function AddCategory() {
     if (upload) {
       upload.addEventListener("change", (e) => {
         if (
-          e.target.files[0].size < 5000000 &&
+          e.target.files[0].size < 50000 &&
           upload.value != upload2.value &&
           (e.target.files[0].type == "image/jpeg" ||
             e.target.files[0].type == "image/jpg")
         ) {
+          reader.readAsDataURL(upload.files[0]);
+          reader.addEventListener("load", () => {
+            localStorage.setItem("recent-image", reader.result);
+          });
           setPreview(URL.createObjectURL(e.target.files[0]));
           show.classList.remove("hidden");
           if (upload2) {
             upload2.addEventListener("change", (e) => {
               if (
-                e.target.files[0].size < 5000000 &&
+                e.target.files[0].size < 50000 &&
                 upload.value != upload2.value &&
                 (e.target.files[0].type == "image/jpeg" ||
                   e.target.files[0].type == "image/jpg")
               ) {
                 setPreview2(URL.createObjectURL(e.target.files[0]));
+                reader2.readAsDataURL(upload2.files[0]);
+                reader2.addEventListener("load", () => {
+                  localStorage.setItem("recent-image2", reader2.result);
+                });
               } else {
                 alert("image not valid, select another image");
+                localStorage.removeItem("recent-image2");
                 setPreview2(null);
                 e.target.value = "";
               }
@@ -52,6 +66,7 @@ export default function AddCategory() {
         } else {
           alert("image not valid, select another image");
           show.classList.add("hidden");
+          localStorage.clear();
           setPreview(null);
           setPreview2(null);
           e.target.value = "";
@@ -64,8 +79,18 @@ export default function AddCategory() {
   const handlesubmit = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    setAddCategory(formData);
+    const { nameCategory, price, facilityCategory, descCategory } =
+      Object.fromEntries(formData);
+    setAddCategory({
+      nameCategory: nameCategory,
+      price: price,
+      facilityCategory: facilityCategory,
+      descCategory: descCategory,
+      image: localStorage.getItem("recent-image"),
+      image2: localStorage.getItem("recent-image2"),
+    });
     setTimeout(() => {
+      localStorage.clear();
       navigate("/category");
     }, 1000);
   };
@@ -134,11 +159,10 @@ export default function AddCategory() {
                       </div>
                       <div className="md:col-span-3">
                         <label>
-                          image <span className="text-[12px]">(max 5mb)</span>
+                          image <span className="text-[12px]">(max 50kb)</span>
                         </label>
                         <input
                           id="upload"
-                          name="image"
                           required
                           type="file"
                           accept=".jpg, .jpeg"
@@ -152,11 +176,10 @@ export default function AddCategory() {
                       </div>
                       <div className="md:col-span-3 hidden" id="show">
                         <label>
-                          image <span className="text-[12px]">(max 5mb)</span>
+                          image <span className="text-[12px]">(max 50kb)</span>
                         </label>
                         <input
                           id="upload2"
-                          name="image2"
                           type="file"
                           accept=".jpg, .jpeg"
                           className="py-[7px] h-10 pl-4 border mt-1 rounded px-4 w-full bg-gray-50"
@@ -173,7 +196,10 @@ export default function AddCategory() {
                       <button
                         className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                         type="button"
-                        onClick={() => navigate("/category")}
+                        onClick={() => {
+                          localStorage.clear();
+                          navigate("/category");
+                        }}
                       >
                         Close
                       </button>

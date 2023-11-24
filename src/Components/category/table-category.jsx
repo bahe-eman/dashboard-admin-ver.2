@@ -77,11 +77,7 @@ export default function TableCategory({ categories, deleteCategory }) {
                       {facilityCategory}
                     </td>
                     <td className="p-4 border-secondary-gray border border-b-2 border-opacity-10">
-                      <img
-                        src={`http://localhost:2000/${image}`}
-                        className="h-32"
-                        alt="image not found"
-                      />
+                      <img src={image} className="h-32" alt="image not found" />
                     </td>
                     <td className="p-4 border-secondary-gray border border-b-2 border-opacity-10">
                       <div className="flex justify-center items-center flex-nowrap">

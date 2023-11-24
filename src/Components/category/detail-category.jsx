@@ -55,15 +55,9 @@ export default function DetailCategory() {
               </tbody>
             </table>
             <div className="w-full flex mx-2 bg-primary-gray">
-              <img
-                src={`${import.meta.env.VITE_ADDR_API}/${categoryId.image}`}
-                className="h-80 mx-4"
-              />
+              <img src={categoryId.image} className="h-80 mx-4" />
               {categoryId.image2 && (
-                <img
-                  src={`${import.meta.env.VITE_ADDR_API}/${categoryId.image2}`}
-                  className="h-80 mx-4"
-                />
+                <img src={categoryId.image2} className="h-80 mx-4" />
               )}
             </div>
             <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
