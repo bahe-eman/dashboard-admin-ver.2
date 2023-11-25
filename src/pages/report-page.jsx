@@ -20,9 +20,9 @@ const LaporanPage = () => {
   return (
     <div className="w-full">
       <main className="bg-primary-gray grow overflow-y-auto h-[calc(100vh-67.33px)]">
-        <h1 className="p-4 font-raleway text-2xl font-semibold">Laporan</h1>
+        <h1 className="p-4 font-raleway text-2xl font-semibold">Report</h1>
         <form className="font-roboto px-6 mx-4 border rounded-lg bg-white max-lg:px-4 overflow-auto shadow-xl">
-          <table className="mb-4 border-collapse rounded-lg text-sm text-left text-gray-500 w-full mt-[30px] border-4 border-cyan-500 rounded-xl">
+          <table className="mb-4 border-collapse text-sm text-left text-gray-500 w-full mt-[30px] border-4 border-cyan-500 rounded-xl">
             <thead className="text-xs text-gray-700 uppercase bg-gray-50">
               <tr>
                 <th className="border border-b-2 border-opacity-20 border-secondary-gray p-4 text-left">
@@ -50,7 +50,7 @@ const LaporanPage = () => {
                   Payment Status
                 </th>
                 <th className="border border-b-2 border-opacity-20 border-secondary-gray p-4 text-left w-[210px] min-w-[210px]">
-                  Opsi
+                  Option
                 </th>
               </tr>
             </thead>

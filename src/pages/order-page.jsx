@@ -52,7 +52,7 @@ export default function PesanKamarPage() {
 
   return (
     <main className="bg-primary-gray grow overflow-y-auto h-[calc(100vh-67.33px)]">
-      <h1 className="m-4 text-2xl font-semibold">Pesan Kamar</h1>
+      <h1 className="m-4 text-2xl font-semibold">Order</h1>
       <div
         id="modal"
         className="bg-white border inset-0 rounded-lg mt-2 mx-4 mb-4 p-4 overflow-x-auto"
@@ -63,20 +63,20 @@ export default function PesanKamarPage() {
         >
           <div className="p-4 flex gap-4 flex-wrap">
             <div className="flex flex-col">
-              <label className="text-zinc-800 ">Kategori</label>
+              <label className="text-zinc-800 ">Category</label>
               <select
                 name="kategori"
                 id=""
                 className="focus:outline-secondary-gray outline-secondary-gray p-2.5 rounded-full border border-gray-300 text-secondary-gray"
               >
-                <option>--pilih kategori--</option>
+                <option>--select category--</option>
                 <option>Executive Suite</option>
                 <option>Super Delux</option>
                 <option>Junior Suite</option>
               </select>
             </div>
             <div className="flex flex-col">
-              <label className="text-zinc-800 text-primary-grey">Lantai</label>
+              <label className="text-zinc-800 text-primary-grey">Floor</label>
               <select
                 onChange={(e) => setRoomid(e.target.value)}
                 required
@@ -84,26 +84,26 @@ export default function PesanKamarPage() {
                 id=""
                 className="focus:outline-secondary-gray p-2.5 rounded-full border border-gray-300 text-secondary-gray"
               >
-                <option>--pilih Lantai--</option>
+                <option>--select floor--</option>
                 <option value="1">1</option>
                 <option value="3">3</option>
                 <option>2</option>
               </select>
             </div>
             <div className="flex flex-col text-secondary-gray">
-              <label className="text-zinc-800">No kamar</label>
+              <label className="text-zinc-800">No Room</label>
               <select
                 name="No kamar"
                 id=""
                 className="focus:outline-secondary-gray p-2.5 rounded-full border border-gray-300 text-secondary-gray"
               >
-                <option>--pilih No kamar--</option>
+                <option>--select room--</option>
                 <option>1</option>
                 <option>2</option>
               </select>
             </div>
             <div className="flex flex-col text-secondary-gray">
-              <label className="text-zinc-800">Harga kamar</label>
+              <label className="text-zinc-800">Price</label>
               <input
                 onChange={(e) => setCheckIn(e.target.value)}
                 required
@@ -114,7 +114,7 @@ export default function PesanKamarPage() {
               />
             </div>
             <div className="flex flex-col text-secondary-gray">
-              <label className="text-zinc-800">Tanggal check-in</label>
+              <label className="text-zinc-800">Check In Date</label>
               <input
                 onChange={(e) => setCheckIn(e.target.value)}
                 required
@@ -125,7 +125,7 @@ export default function PesanKamarPage() {
               />
             </div>
             <div className="flex flex-col text-secondary-gray">
-              <label className="text-zinc-800">Tanggal Check-out</label>
+              <label className="text-zinc-800">Check Out Date</label>
               <input
                 onChange={(e) => setCheckOut(e.target.value)}
                 type="date"
@@ -135,7 +135,7 @@ export default function PesanKamarPage() {
               />
             </div>
             <div className="flex flex-col text-secondary-gray">
-              <label className="text-zinc-800">Jumlah hari</label>
+              <label className="text-zinc-800">Total Days of Stay</label>
               <input
                 onChange={(e) => setDay(e.target.value)}
                 type="number"
@@ -146,7 +146,7 @@ export default function PesanKamarPage() {
             </div>
           </div>
           <div className="mx-2">
-            <h3 className="font-semibold text-secondary-gray">Custummer</h3>
+            <h3 className="font-semibold text-secondary-gray">Customer</h3>
           </div>
           <div className="p-4 flex gap-4 flex-wrap">
             <div className="flex flex-col text-secondary-gray">
@@ -160,7 +160,7 @@ export default function PesanKamarPage() {
               />
             </div>
             <div className="flex flex-col text-secondary-gray">
-              <label className="text-zinc-800">Nama lengkap</label>
+              <label className="text-zinc-800">Full Name</label>
               <input
                 onChange={(e) => setNamecustomer(e.target.value)}
                 type="text"
@@ -170,7 +170,7 @@ export default function PesanKamarPage() {
               />
             </div>
             <div className="flex flex-col text-secondary-gray">
-              <label className="text-zinc-800">No telepon</label>
+              <label className="text-zinc-800">Phone Number</label>
               <input
                 onChange={(e) => settlpnCustomer(e.target.value)}
                 type="text"
@@ -190,7 +190,7 @@ export default function PesanKamarPage() {
               />
             </div>
             <div className="flex flex-col text-secondary-gray">
-              <label className="text-zinc-800">Alamat</label>
+              <label className="text-zinc-800">Address</label>
               <input
                 onChange={(e) => setaddressCustomer(e.target.value)}
                 type="text"
@@ -202,7 +202,7 @@ export default function PesanKamarPage() {
           </div>
           <div className="p-4 flex gap-4 flex-wrap justify-end">
             <div className="flex flex-col text-secondary-gray">
-              <label className="text-zinc-800">Untuk berapa orang</label>
+              <label className="text-zinc-800">For How Many People</label>
               <input
                 onChange={(e) => setPeople(e.target.value)}
                 type="number"
@@ -212,7 +212,7 @@ export default function PesanKamarPage() {
               />
             </div>
             <div className="flex flex-col text-secondary-gray">
-              <label className="text-zinc-800">Status pembayaran</label>
+              <label className="text-zinc-800">Payment Status</label>
               <input
                 onChange={(e) => setStatusPayment(e.target.value)}
                 type="text"
@@ -222,7 +222,7 @@ export default function PesanKamarPage() {
               />
             </div>
             <div className="flex flex-col text-secondary-gray">
-              <label className="text-zinc-800">Jumlah bayar</label>
+              <label className="text-zinc-800">Total Payment</label>
               <input
                 onChange={(e) => setTotalPayment(e.target.value)}
                 type="number"

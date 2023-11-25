@@ -50,7 +50,7 @@ export default function AdminDetail({ idData }) {
                     <div className="md:col-span-3">
                       <label>Level</label>
                       <select className="h-10 border mt-1 rounded px-4 w-full bg-gray-0">
-                        <option value="0">--pilih level--</option>
+                        <option value="0">--select level--</option>
                         <option>Admin</option>
                         <option>Superadmin</option>
                       </select>
@@ -65,31 +65,31 @@ export default function AdminDetail({ idData }) {
                       />
                     </div>
                     <div className="md:col-span-3">
-                      <label>Nama Lengkap</label>
+                      <label>Full Name</label>
                       <input
                         type="text"
                         value={admn.name}
                         className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                        placeholder="Nama Lengkap"
+                        placeholder="Full Name"
                         required
                       />
                     </div>
                     <div className="md:col-span-3">
-                      <label>Nomor Telepon</label>
+                      <label>Phone Number</label>
                       <input
                         type="text"
                         value={admn.phone}
                         className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                        placeholder="Nomor Telepon"
+                        placeholder="Phone Number"
                       />
                     </div>
                     <div className="md:col-span-6">
-                      <label>Alamat</label>
+                      <label>Address</label>
                       <input
                         type="text"
                         value={admn.address}
                         className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                        placeholder="Alamat"
+                        placeholder="Address"
                       />
                     </div>
                     <div className="md:col-span-3">
@@ -111,7 +111,7 @@ export default function AdminDetail({ idData }) {
                       />
                     </div>
                     <div className="md:col-span-3">
-                      <label>Foto</label>
+                      <label>Photo</label>
                       <input
                         type="file"
                         className="py-[7px] h-10 pl-4 border rounded-sm bg-gray-50 md:w-[500px] lg:w-full"

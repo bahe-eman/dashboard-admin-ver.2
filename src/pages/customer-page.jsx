@@ -20,30 +20,28 @@ const CustomerPage = () => {
   return (
     <div className="w-full">
       <main className="bg-primary-gray grow overflow-y-auto h-[calc(100vh-67.33px)]">
-        <h1 className="p-4 font-raleway text-2xl font-semibold">
-          Data Customer
-        </h1>
+        <h1 className="p-4 font-raleway text-2xl font-semibold">Customer</h1>
         <form className="font-roboto px-6 mx-4 border rounded-lg bg-white max-lg:px-4 overflow-auto shadow-xl">
-          <table className="mb-4 border-collapse rounded-lg text-sm text-left text-gray-500 w-full mt-[30px] border-4 border-lime-500 rounded-xl">
+          <table className="mb-4 border-collapse text-sm text-left text-gray-500 w-full mt-[30px] border-4 border-lime-500 rounded-xl">
             <thead className="text-xs text-gray-700 uppercase bg-gray-50">
               <tr>
                 <th className="border border-b-2 border-opacity-20 border-secondary-gray p-4 text-left">
                   No
                 </th>
                 <th className="border border-b-2 border-opacity-20 border-secondary-gray p-4 text-left">
-                  Nama Customer
+                  Full Name
                 </th>
                 <th className="border border-b-2 border-opacity-20 border-secondary-gray p-4 text-left">
-                  Email Customer
+                  Email
                 </th>
                 <th className="border border-b-2 border-opacity-20 border-secondary-gray p-4 text-left">
-                  Tlpn Customer
+                  Phone
                 </th>
                 <th className="border border-b-2 border-opacity-20 border-secondary-gray p-4 text-left">
                   Status :
                 </th>
                 <th className="border border-b-2 border-opacity-20 border-secondary-gray p-4 text-left w-[210px] min-w-[210px]">
-                  Opsi
+                  Option
                 </th>
               </tr>
             </thead>

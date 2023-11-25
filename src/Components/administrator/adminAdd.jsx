@@ -1,21 +1,6 @@
-import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-export default function AdminEdit() {
-  const { id } = useParams();
-  const [admn, admnData] = useState({});
-  useEffect(() => {
-    fetch("http://localhost:2000/users/" + id)
-      .then((res) => {
-        return res.json();
-      })
-      .then((resp) => {
-        admnData(resp);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-  }, []);
+export default function AdminAdd() {
   return (
     <>
       <div className="w-full">
@@ -26,7 +11,7 @@ export default function AdminEdit() {
           ></div>
           <div className="p-4 h-[calc(100vh-67.33px)]">
             <div>
-              <h1 className="text-2xl font-semibold">Form Update Admin</h1>
+              <h1 className="text-2xl font-semibold">Form Add Admin</h1>
             </div>
             <div className="p-4">
               <div className="p-6 bg-white border border-gray-200 rounded-lg shadow">
@@ -37,7 +22,7 @@ export default function AdminEdit() {
                         <label>Level</label>
                         <select className="h-10 border mt-1 rounded px-4 w-full bg-gray-0">
                           <option value="0">--select level--</option>
-                          <option selected>Admin</option>
+                          <option>Admin</option>
                           <option>Superadmin</option>
                         </select>
                       </div>
@@ -45,7 +30,6 @@ export default function AdminEdit() {
                         <label>NIK</label>
                         <input
                           type="text"
-                          value="3212123412344321"
                           className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                           placeholder="NIK"
                         />
@@ -54,7 +38,6 @@ export default function AdminEdit() {
                         <label>Full Name</label>
                         <input
                           type="text"
-                          value="Admin"
                           className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                           placeholder="Full Name"
                           required
@@ -64,7 +47,6 @@ export default function AdminEdit() {
                         <label>Phone Number</label>
                         <input
                           type="text"
-                          value={"+6281514566915"}
                           className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                           placeholder="Phone Number"
                         />
@@ -73,7 +55,6 @@ export default function AdminEdit() {
                         <label>Address</label>
                         <input
                           type="text"
-                          value={"Jl.Sukses Selalu - Indonesia"}
                           className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                           placeholder="Address"
                         />
@@ -82,7 +63,6 @@ export default function AdminEdit() {
                         <label>Email</label>
                         <input
                           type="email"
-                          value={"admin@gmail.com"}
                           className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                           placeholder="Email"
                         />
@@ -117,7 +97,7 @@ export default function AdminEdit() {
                         className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                         type="submit"
                       >
-                        Update
+                        Save
                       </button>
                     </div>
                   </form>

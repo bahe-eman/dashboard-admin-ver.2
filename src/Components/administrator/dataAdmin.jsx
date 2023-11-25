@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import AdminDetail from "./adminDetail";
-import AdminEdit from "./adminEdit";
+import { Link } from "react-router-dom";
 export default function DataAdmin({ dataAdmin }) {
   const Removefunction = (id) => {
     if (window.confirm("Do you want to remove?")) {
-      fetch("https://651107013ce5d181df5da09e.mockapi.io/admin/" + id, {
+      fetch("http://localhost:2000/users/" + id, {
         method: "DELETE",
       })
         .then((res) => {
@@ -22,26 +22,36 @@ export default function DataAdmin({ dataAdmin }) {
       {dataAdmin ? (
         <>
           {dataAdmin.map((product, index) => (
-            <tr key={product.id}>
+            <tr key={product.idUser}>
               <td>{index + 1}</td>
-              <td>{product.name}</td>
-              <td>{product.username}</td>
-              <td>{product.level}</td>
-              <td>{product.lastLogin}</td>
-              <td>{product.status}</td>
+              <td>{product.nameUser}</td>
+              <td>{product.emailUser}</td>
+              <td>{product.userLevel.nameLevel}</td>
+              <td>{product.userStatus.nameStatus}</td>
               <td>
                 <div className="w-[190px]">
-                  <AdminDetail idData={product.id} />
+                  <AdminDetail idData={product.idUser} />
                   <button
                     title="hapus"
                     onClick={() => {
-                      Removefunction(product.id);
+                      Removefunction(product.idUser);
                     }}
                     className="modal-hapusnya mr-1 py-1 px-5 bg-red-400 rounded-md hover:bg-hover-red"
                   >
                     <i className="ri-delete-bin-line text-white"></i>
                   </button>
-                  <AdminEdit idData={product.id} />
+                  <Link to={"/update-admin/" + product.idUser}>
+                    <button
+                      type="button"
+                      title="icon edit"
+                      className="edit py-1 px-5 bg-yellow-400 rounded-md hover:bg-hover-yellow"
+                    >
+                      <i
+                        title="edit"
+                        className="ri-file-edit-line text-white"
+                      ></i>
+                    </button>
+                  </Link>
                 </div>
               </td>
             </tr>

@@ -10,7 +10,7 @@ export default function AddCategory() {
   useEffect(() => {
     if (addCategory) {
       console.log(addCategory);
-      fetch("http://localhost:2000/category/add", {
+      fetch(`${import.meta.env.VITE_ADDR_API}/category/add`, {
         method: "POST",
         body: addCategory,
       })
@@ -66,7 +66,7 @@ export default function AddCategory() {
     const formData = new FormData(e.target);
     setAddCategory(formData);
     setTimeout(() => {
-      navigate("/category-page");
+      navigate("/category");
     }, 1000);
   };
 
@@ -173,7 +173,7 @@ export default function AddCategory() {
                       <button
                         className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                         type="button"
-                        onClick={() => navigate("/category-page")}
+                        onClick={() => navigate("/category")}
                       >
                         Close
                       </button>
