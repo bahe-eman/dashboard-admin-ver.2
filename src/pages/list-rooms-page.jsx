@@ -5,15 +5,19 @@ import TambahKamar from "../Components/tambah-kamar";
 import Cari from "../Components/Cari";
 import TambahKamarForm from "./tambah-kamar";
 import { Link } from "react-router-dom";
+import auth from "../utils/auth";
 
 export default function ListKamarPage() {
   const [state, setState] = useState();
   useEffect(() => {
-    fetch("http://localhost:2000/rooms")
+    fetch(`${import.meta.env.VITE_ADDR_API}/rooms`, {
+      headers: {
+        Authorization: `Bearer ${auth.isAuthenticated()}`,
+      },
+    })
       .then((res) => res.json())
       .then(setState);
   }, []);
-  
 
   return (
     <div className="w-full lg:w-[calc(100vw-220px)]">
@@ -23,9 +27,9 @@ export default function ListKamarPage() {
           <div className="grid gap-5 place-items-start sm:flex justify-between m-4 ">
             {/* <TambahKamarForm /> */}
             <Link to="/tambah-kamar">
-            <button className="py-2 px-5 bg-blue-400 rounded-md text-sm text-white hover:bg-hover-blue">
-              <i className="ri-hotel-bed-line mr-2"></i>Add Room
-            </button>
+              <button className="py-2 px-5 bg-blue-400 rounded-md text-sm text-white hover:bg-hover-blue">
+                <i className="ri-hotel-bed-line mr-2"></i>Add Room
+              </button>
             </Link>
             {/* <Cari cari={cari} /> */}
           </div>

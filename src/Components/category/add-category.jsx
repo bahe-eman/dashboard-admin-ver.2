@@ -1,23 +1,46 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import auth from "../../utils/auth";
 
 export default function AddCategory() {
   const [addCategory, setAddCategory] = useState(null);
+  const [response, setResponse] = useState([]);
+  const [connected, setConnected] = useState(true);
   const [preview, setPreview] = useState(null);
   const [preview2, setPreview2] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     if (addCategory) {
-      console.log(addCategory);
       fetch(`${import.meta.env.VITE_ADDR_API}/category/add`, {
         method: "POST",
+        headers: {
+          Authorization: `Bearer ${auth.isAuthenticated()}`,
+        },
         body: addCategory,
       })
         .then((res) => res.json())
-        .then((res) => alert(res.message));
+        .then(setResponse)
+        .catch(() => {
+          setConnected(false);
+        });
     }
   }, [addCategory]);
+
+  useEffect(() => {
+    if (response.success) {
+      alert(response.success);
+    }
+    if (response.message) {
+      alert(response.message);
+      auth.logout();
+      navigate("/");
+    }
+    if (!connected) {
+      alert("database not conected...");
+      setConnected(true);
+    }
+  }, [response.success, response.message, connected]);
 
   useEffect(() => {
     const upload = document.getElementById("upload");
@@ -157,6 +180,7 @@ export default function AddCategory() {
                         <input
                           id="upload2"
                           name="image2"
+                          required
                           type="file"
                           accept=".jpg, .jpeg"
                           className="py-[7px] h-10 pl-4 border mt-1 rounded px-4 w-full bg-gray-50"

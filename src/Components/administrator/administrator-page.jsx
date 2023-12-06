@@ -2,11 +2,16 @@ import Modal from "./modal";
 import DataAdmin from "./dataAdmin";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import auth from "../../utils/auth";
 
 export default function AdministratorPage() {
   const [state, setState] = useState();
   useEffect(() => {
-    fetch("http://localhost:2000/users/")
+    fetch("http://localhost:2000/users/", {
+      headers: {
+        Authorization: `Bearer ${auth.isAuthenticated()}`,
+      },
+    })
       .then((res) => res.json())
       .then(setState);
   }, []);

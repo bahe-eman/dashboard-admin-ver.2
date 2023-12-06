@@ -1,9 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { global } from "../../assets/context";
+import auth from "../../utils/auth";
 
 export default function EditCategory() {
-  const [getCategory, setGetCategory] = useState(null);
+  const [response, setResponse] = useState([]);
+  const [getCategory, setGetCategory] = useState([]);
   const [editCategory, setEditCategory] = useState(null);
   const [preview, setPreview] = useState(null);
   const [preview2, setPreview2] = useState(null);
@@ -15,21 +17,45 @@ export default function EditCategory() {
   }
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_ADDR_API}/category/${dataId}`)
+    fetch(`${import.meta.env.VITE_ADDR_API}/category/${dataId}`, {
+      headers: {
+        Authorization: `Bearer ${auth.isAuthenticated()}`,
+      },
+    })
       .then((res) => res.json())
       .then(setGetCategory);
   }, []);
+  const { category } = getCategory;
 
   useEffect(() => {
     if (editCategory) {
       fetch(`${import.meta.env.VITE_ADDR_API}/category/update/${dataId}`, {
         method: "PUT",
+        headers: {
+          Authorization: `Bearer ${auth.isAuthenticated()}`,
+        },
         body: editCategory,
       })
         .then((res) => res.json())
-        .then((res) => alert(res.message));
+        .then(setResponse);
     }
   }, [editCategory]);
+
+  useEffect(() => {
+    if (response.success) {
+      alert(response.success);
+    }
+    if (response.message) {
+      alert(response.message);
+      auth.logout();
+      navigate("/");
+    }
+    if (getCategory.message) {
+      alert(getCategory.message);
+      auth.logout();
+      navigate("/");
+    }
+  }, [response.success, response.message, getCategory.message]);
 
   useEffect(() => {
     const upload = document.getElementById("upload");
@@ -82,7 +108,7 @@ export default function EditCategory() {
     }, 1000);
   };
   return (
-    getCategory && (
+    category && (
       <div className="w-full">
         <main className="bg-primary-gray grow overflow-y-auto">
           <div
@@ -105,8 +131,8 @@ export default function EditCategory() {
                           required
                           className="h-10 border mt-1 rounded px-4 w-full bg-gray-0"
                         >
-                          <option value={getCategory.nameCategory}>
-                            {getCategory.nameCategory}
+                          <option value={category.nameCategory}>
+                            {category.nameCategory}
                           </option>
                           <option value={"Junior Suite"}>Junior Suite</option>
                           <option value={"Executive Suite"}>
@@ -122,7 +148,7 @@ export default function EditCategory() {
                           required
                           type="text"
                           className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                          placeholder={getCategory.price}
+                          placeholder={category.price}
                         />
                       </div>
                       <div className="md:col-span-3">
@@ -132,7 +158,7 @@ export default function EditCategory() {
                           required
                           type="text"
                           className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                          placeholder={getCategory.facilityCategory}
+                          placeholder={category.facilityCategory}
                         />
                       </div>
                       <div className="md:col-span-3">
@@ -142,7 +168,7 @@ export default function EditCategory() {
                           required
                           type="text"
                           className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                          placeholder={getCategory.descCategory}
+                          placeholder={category.descCategory}
                         />
                       </div>
                       <div className="md:col-span-3">
@@ -170,6 +196,7 @@ export default function EditCategory() {
                         <input
                           id="upload2"
                           name="image2"
+                          required
                           type="file"
                           accept=".jpg, .jpeg"
                           className="py-[7px] h-10 pl-4 border mt-1 rounded px-4 w-full bg-gray-50"

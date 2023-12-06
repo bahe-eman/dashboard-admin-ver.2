@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
 import AdminDetail from "./adminDetail";
 import { Link } from "react-router-dom";
+import auth from "../../utils/auth";
 export default function DataAdmin({ dataAdmin }) {
   const Removefunction = (id) => {
     if (window.confirm("Do you want to remove?")) {
-      fetch("http://localhost:2000/users/" + id, {
+      fetch(`${import.meta.env.VITE_ADDR_API}/users/` + id, {
+        headers: {
+          Authorization: `Bearer ${auth.isAuthenticated()}`,
+        },
         method: "DELETE",
       })
         .then((res) => {
@@ -30,7 +34,7 @@ export default function DataAdmin({ dataAdmin }) {
               <td>{product.userStatus.nameStatus}</td>
               <td>
                 <div className="w-[190px]">
-                  <AdminDetail idData={product.idUser} />
+                  {/* <AdminDetail idData={product.idUser} /> */}
                   <button
                     title="hapus"
                     onClick={() => {

@@ -19,7 +19,8 @@ export default function LoginPage() {
       }),
     })
       .then((res) => res.json())
-      .then(setLogin);
+      .then(setLogin)
+      .catch(() => alert("database not conected..."));
   };
   useEffect(() => {
     if (login) {
