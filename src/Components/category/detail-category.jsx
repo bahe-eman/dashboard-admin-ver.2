@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useContext } from "react";
-import { global } from "../../assets/context";
+import { global } from "../../context/context";
 import { useNavigate } from "react-router-dom";
 import auth from "../../utils/auth";
 import Slider from "react-slick";
@@ -36,10 +36,10 @@ export default function DetailCategory() {
     dots: true,
     infinite: true,
     speed: 500,
+    autoplay: true,
+    autoplaySpeed: 1500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    prevArrow: <button className="slick-prev"></button>,
-    nextArrow: <button className="slick-next"></button>,
   };
 
   return (
@@ -85,8 +85,8 @@ export default function DetailCategory() {
               </tbody>
             </table>
             <div className="flex justify-center">
-              <div className="bg-slate-300 w-[650px] flex justify-center rounded-md">
-                <Slider {...sliderSettings} className="w-[600px]">
+              <div className="w-[650px] flex justify-center rounded-md">
+                <Slider {...sliderSettings} className="w-3/4">
                   <img
                     src={`${import.meta.env.VITE_ADDR_API}/${
                       response.category.image

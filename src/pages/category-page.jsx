@@ -61,8 +61,7 @@ export default function CategoryPage() {
   useEffect(() => {
     if (response.message) {
       alert(response.message);
-      auth.logout();
-      navigate("/");
+      navigate("/category");
     }
     if (response.success) {
       alert(response.success);
@@ -81,9 +80,9 @@ export default function CategoryPage() {
           <div className="grid gap-5 place-items-start sm:flex justify-between m-4">
             <button
               onClick={() => navigate("/category-add")}
-              className="py-2 px-5 bg-blue-400 rounded-md text-sm text-white hover:bg-hover-blue"
+              className="py-2 px-5 bg-blue-400 rounded-md text-xs text-white hover:bg-hover-blue"
             >
-              <i className="ri-hotel-bed-line mr-2"></i>Add Category
+              <i className="ri-hotel-bed-line text-sm mr-2"></i>Add Category
             </button>
             <SearchCategory search={search} />
           </div>

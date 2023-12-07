@@ -8,7 +8,14 @@ const auth = {
     return Cookies.set("token", token);
   },
   logout: () => {
+    Cookies.remove("user");
     return Cookies.remove("token");
+  },
+  storeUser: (user) => {
+    return Cookies.set("user", user);
+  },
+  isUser: () => {
+    return Cookies.get("user");
   },
 };
 

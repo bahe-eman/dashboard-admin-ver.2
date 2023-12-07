@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { global } from "../../assets/context";
+import { global } from "../../context/context";
 import auth from "../../utils/auth";
 
 export default function EditCategory() {
@@ -47,8 +47,7 @@ export default function EditCategory() {
     }
     if (response.message) {
       alert(response.message);
-      auth.logout();
-      navigate("/");
+      navigate("/category");
     }
     if (getCategory.message) {
       alert(getCategory.message);
@@ -126,20 +125,13 @@ export default function EditCategory() {
                     <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-6 m-5">
                       <div className="md:col-span-3">
                         <label>Name Category</label>
-                        <select
+                        <input
                           name="nameCategory"
                           required
-                          className="h-10 border mt-1 rounded px-4 w-full bg-gray-0"
-                        >
-                          <option value={category.nameCategory}>
-                            {category.nameCategory}
-                          </option>
-                          <option value={"Junior Suite"}>Junior Suite</option>
-                          <option value={"Executive Suite"}>
-                            Executive Suite
-                          </option>
-                          <option value={"Super Delux"}>Super Delux</option>
-                        </select>
+                          type="text"
+                          className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                          placeholder={category.nameCategory}
+                        />
                       </div>
                       <div className="md:col-span-3">
                         <label>Price ($/night)</label>

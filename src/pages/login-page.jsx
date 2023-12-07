@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import auth from "../utils/auth";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -26,6 +26,7 @@ export default function LoginPage() {
     if (login) {
       if (login.token) {
         auth.storeAuthCredential(login.token);
+        auth.storeUser(login.userData.nameUser);
         navigate("/dashboard");
       } else {
         alert(login.message);

@@ -1,6 +1,6 @@
 import { BrowserRouter } from "react-router-dom";
 import Router from "./routers";
-import { global } from "./assets/context";
+import { global } from "./context/context";
 import { useState } from "react";
 
 function App() {

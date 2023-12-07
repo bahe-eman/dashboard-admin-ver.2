@@ -2,8 +2,10 @@ import logo from "../assets/logo.png";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import auth from "../utils/auth";
 import "remixicon/fonts/remixicon.css";
+import { useState } from "react";
 
 function PrivateRoute() {
+  const user = useState(auth.isUser);
   const navigate = useNavigate();
   const logout = () => {
     auth.logout();
@@ -16,7 +18,6 @@ function PrivateRoute() {
     document.getElementById("close-sidebar").classList.toggle("hidden");
   };
 
-  // true jika sudah login
   if (auth.isAuthenticated()) {
     return (
       <>
@@ -26,7 +27,7 @@ function PrivateRoute() {
               <img className="w-32 ml-4" src={logo} alt="logo" />
               <div className="flex items-center">
                 <Link to="/profile-user">
-                  <p className="sm:text-xl ml-8 mr-2">admin</p>
+                  <p className="sm:text-sm ml-8 mr-2 capitalize">{user}</p>
                 </Link>
                 <button
                   onClick={logout}

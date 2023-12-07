@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { useContext } from "react";
 
-import { global } from "../../assets/context";
+import { global } from "../../context/context";
 import { optionButton } from "./option-button";
 import { useNavigate } from "react-router-dom";
 
@@ -129,6 +129,6 @@ export default function TableCategory({ categories, deleteCategory }) {
 }
 
 TableCategory.propTypes = {
-  categories: PropTypes.object,
+  categories: PropTypes.array,
   deleteCategory: PropTypes.func,
 };
