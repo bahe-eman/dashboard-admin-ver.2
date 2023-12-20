@@ -28,8 +28,8 @@ export default function LoginPage() {
       if (login.token) {
         auth.storeAuthCredential(login.token);
         auth.storeUser(login.userData.nameUser);
-        auth.storeLevel(login.userData.levelUser);
-        if (auth.isLevel() == 2) navigate("/administrator");
+        auth.storeRole(login.userData.roleUser);
+        if (auth.isRole() == 1) navigate("/administrator");
         else navigate("/dashboard");
       } else {
         alert(login.message);

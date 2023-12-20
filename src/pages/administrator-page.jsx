@@ -1,12 +1,12 @@
 import toast from "react-hot-toast";
-import useGetDataCheck from "../../hooks/useGetDataCheck";
-import DataAdmin from "./dataAdmin";
+import useGetDataCheck from "../hooks/useGetDataCheck";
+import DataAdmin from "../Components/administrator/dataAdmin";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import auth from "../../utils/auth";
+import auth from "../utils/auth";
 
 export default function AdministratorPage() {
-  const [state, setState] = useState();
+  const [state, setState] = useState([]);
   const { isLoading } = useGetDataCheck(
     `${import.meta.env.VITE_ADDR_API}/users`
   );
@@ -17,9 +17,7 @@ export default function AdministratorPage() {
   }, [isLoading]);
 
   useEffect(() => {
-
-    fetch("https://backendappmyhotel.vercel.app/users/", {
-
+    fetch(`${import.meta.env.VITE_ADDR_API}/users`, {
       headers: {
         Authorization: `Bearer ${auth.isAuthenticated()}`,
       },

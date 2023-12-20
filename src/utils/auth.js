@@ -18,11 +18,11 @@ const auth = {
   isUser: () => {
     return Cookies.get("user");
   },
-  storeLevel: (level) => {
-    return Cookies.set("level", level);
+  storeRole: (role) => {
+    return Cookies.set("role", role);
   },
-  isLevel: () => {
-    return Cookies.get("level");
+  isRole: () => {
+    return Cookies.get("role");
   },
 };
 

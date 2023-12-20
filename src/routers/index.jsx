@@ -12,7 +12,7 @@ import CheckinKamarPage from "../pages/checkin-page";
 import DetailCheckin from "../pages/detail-check";
 import CheckoutKamarpage from "../pages/checkout-page";
 import LaporanPage from "../pages/report-page";
-import AdministratorPage from "../Components/administrator/administrator-page";
+import AdministratorPage from "../pages/administrator-page";
 import ProfilAdmin from "../Components/ProfilAdmin/ProfilAdmin";
 import TambahKamarForm from "../Components/list-rooms/tambah-kamar";
 import UpdateRoomForm from "../Components/list-rooms/update-room";
@@ -24,7 +24,7 @@ import DetailCategory from "../Components/category/detail-category";
 import EditCategory from "../Components/category/edit-category";
 import AdminAdd from "../Components/administrator/adminAdd";
 import AdminEdit from "../Components/administrator/adminEdit";
-import Rebook from '../pages/rebook'
+import Rebook from "../pages/rebook";
 
 export default function Router() {
   return (

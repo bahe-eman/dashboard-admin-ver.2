@@ -16,8 +16,8 @@ function PrivateRoute() {
   };
 
   useEffect(() => {
-    if (auth.isLevel() == 2) setSuperadmin(true);
-    if (auth.isLevel() == 1) setAdmin(true);
+    if (auth.isRole() == 1) setSuperadmin(true);
+    if (auth.isRole() == 2) setAdmin(true);
   }, []);
 
   const popUp = () => {
