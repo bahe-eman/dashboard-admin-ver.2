@@ -40,19 +40,7 @@ export default function ListTable({ dataHotel }) {
                 No
               </th>
               <th className="border border-b-2 border-opacity-10 border-secondary-blue p-4 text-left min-w-[150px]">
-                Room
-              </th>
-              <th className="border border-b-2 border-opacity-10 border-secondary-blue p-4 text-left">
-                Floor
-              </th>
-              <th className="border border-b-2 border-opacity-10 border-secondary-blue p-4 text-left min-w-[250px]">
-                Category
-              </th>
-              <th className="border border-b-2 border-opacity-10 border-secondary-blue p-4 text-left">
-                Price
-              </th>
-              <th className="border border-b-2 border-opacity-10 border-secondary-blue p-4 text-left">
-                Status
+                Name
               </th>
               <th className="border border-b-2 border-opacity-10 border-secondary-blue p-4 text-left">
                 Option
@@ -60,44 +48,20 @@ export default function ListTable({ dataHotel }) {
             </tr>
           </thead>
           <tbody>
-            {display.map((room, index) => {
+            {display.map((floor, index) => {
               return (
-                <tr key={room.idRoom} className="capitalize">
+                <tr key={floor.idFloor} className="capitalize">
                   <td className="p-4 border-secondary-gray border border-b-2 border-opacity-10">
                     {index + 1}
                   </td>
                   <td className="p-4 border-secondary-gray border border-b-2 border-opacity-10">
-                    {room.nameRoom}-{room.numberRoom}
-                  </td>
-                  <td className="p-4 border-secondary-gray border border-b-2 border-opacity-10">
-                    {room.Floor.nameFloor}
-                  </td>
-                  <td className="p-4 border-secondary-gray border border-b-2 border-opacity-10">
-                    {room.Category.nameCategory}
-                  </td>
-                  <td className="p-4 border-secondary-gray border border-b-2 border-opacity-10">
-                    ${room.Category.price}/night
-                  </td>
-                  <td className="p-4 border-secondary-gray border border-b-2 border-opacity-10">
-                    {room.Status.nameStatus}
+                    {floor.nameFloor}
                   </td>
                   <td className="p-4 border-secondary-gray border border-b-2 border-opacity-10">
                     <div className="flex justify-center items-center flex-nowrap">
-                      {/* <Link to={`/detail-kamar/${room.idRoom}`}>
-                        <button
-                          type="button"
-                          title="detail"
-                          className="detail mr-1 py-1 px-5 bg-green-400 rounded-md hover:bg-hover-green"
-                        >
-                          <i
-                            title="icon detail"
-                            className="ri-search-line text-white"
-                          ></i>
-                        </button>
-                      </Link> */}
                       <button
                         onClick={() => {
-                          Removefunction(room.idRoom);
+                          Removefunction(floor.idFloor);
                         }}
                         type="button"
                         title="hapus"
@@ -108,7 +72,7 @@ export default function ListTable({ dataHotel }) {
                           className="ri-delete-bin-line text-white"
                         ></i>
                       </button>
-                      <Link to={`/update-kamar/${room.idRoom}`}>
+                      <Link to={`/update-kamar/${floor.idFLoor}`}>
                         <button
                           type="button"
                           title="edit"

@@ -129,6 +129,15 @@ function PrivateRoute() {
                           <i className="ri-list-indefinite mr-2"></i>List Rooms
                         </Link>
                       </div>
+                      <div className="pl-6 py-[3px]">
+                        <Link
+                          onClick={popUp}
+                          to="/floor"
+                          className="px-2 py-2 rounded-md focus:bg-blue-200 hover:border hover:border-blue-300 active:bg-blue-300"
+                        >
+                          <i className="ri-list-indefinite mr-2"></i>Floor
+                        </Link>
+                      </div>
                     </details>
                     <details open className="space-y-2 ">
                       <summary className="cursor-pointer list-none px-2 py-2">

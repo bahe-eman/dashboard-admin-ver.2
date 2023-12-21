@@ -24,9 +24,7 @@ export default function TambahKamarForm() {
       statusId,
     };
 
-
-    fetch("https://backendappmyhotel.vercel.app/rooms", {
-
+    fetch(`${import.meta.env.VITE_ADDR_API}/rooms`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -125,8 +123,8 @@ export default function TambahKamarForm() {
                           className="h-10 border mt-1 rounded px-4 w-full bg-gray-0"
                         >
                           <option value={""}>--select--</option>
-                          <option value={6}>Empty</option>
-                          <option value={7}>Booked</option>
+                          <option value={3}>Empty</option>
+                          <option value={4}>Booked</option>
                         </select>
                       </div>
                     </div>

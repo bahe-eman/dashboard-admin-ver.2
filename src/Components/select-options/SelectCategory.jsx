@@ -4,9 +4,13 @@ import auth from "../../utils/auth";
 export default function SelectCategory({}) {
   const [state, setState] = useState([]);
   useEffect(() => {
-    fetch(`https://backendappmyhotel.vercel.app/option`)
+    fetch(`${import.meta.env.VITE_ADDR_API}/category`, {
+      headers: {
+        Authorization: `Bearer ${auth.isAuthenticated()}`,
+      },
+    })
       .then((res) => res.json())
-      .then(setState);
+      .then((res) => setState(res.categories));
   }, []);
   console.log(state);
   return (

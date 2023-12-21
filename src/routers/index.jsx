@@ -7,6 +7,7 @@ import LoginPage from "../pages/login-page";
 import DashboardPage from "../pages/dashboard-page";
 import ProfilePage from "../pages/profile-page";
 import ListKamarPage from "../pages/list-rooms-page";
+import Floor from "../pages/floor";
 import PesanKamarPage from "../pages/order-page";
 import CheckinKamarPage from "../pages/checkin-page";
 import DetailCheckin from "../pages/detail-check";
@@ -14,7 +15,7 @@ import CheckoutKamarpage from "../pages/checkout-page";
 import LaporanPage from "../pages/report-page";
 import AdministratorPage from "../pages/administrator-page";
 import ProfilAdmin from "../Components/ProfilAdmin/ProfilAdmin";
-import TambahKamarForm from "../Components/list-rooms/tambah-kamar";
+import AddRoom from "../Components/list-rooms/add-room";
 import UpdateRoomForm from "../Components/list-rooms/update-room";
 import CustomerPage from "../pages/customer-page";
 
@@ -45,7 +46,8 @@ export default function Router() {
           <Route path="/category-detail" element={<DetailCategory />} />
           <Route path="/category-edit" element={<EditCategory />} />
           <Route path="/list-rooms" element={<ListKamarPage />} />
-          <Route path="/tambah-kamar" element={<TambahKamarForm />} />
+          <Route path="/floor" element={<Floor />} />
+          <Route path="/add-room" element={<AddRoom />} />
           <Route path="/update-kamar/:id" element={<UpdateRoomForm />} />
           <Route path="/customer" element={<CustomerPage />} />
           <Route path="/order" element={<PesanKamarPage />} />
