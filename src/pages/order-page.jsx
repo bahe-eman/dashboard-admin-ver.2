@@ -57,9 +57,7 @@ export default function PesanKamarPage() {
       fotoCustomer,
     };
 
-
-    fetch("https://backendappmyhotel.vercel.app/booking", {
-
+    fetch(`${import.meta.env.VITE_ADDR_API}/booking`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -84,9 +82,9 @@ export default function PesanKamarPage() {
     setTotalPayment(day * price);
   }, [price, day]);
 
-  console.log(totalPayment);
-  console.log(day);
-  console.log(price);
+  // console.log(totalPayment);
+  // console.log(day);
+  // console.log(price);
 
   return (
     <main className="bg-primary-gray grow overflow-y-auto h-[calc(100vh-67.33px)]">

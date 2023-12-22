@@ -12,7 +12,6 @@ export default function SelectCategory({}) {
       .then((res) => res.json())
       .then((res) => setState(res.categories));
   }, []);
-  console.log(state);
   return (
     <>
       {state.map((opc, index) => {

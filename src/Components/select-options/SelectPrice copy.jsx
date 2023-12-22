@@ -12,15 +12,10 @@ export default function SelectPrice({ category }) {
   }
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_ADDR_API}/category`, {
-      headers: {
-        Authorization: `Bearer ${auth.isAuthenticated()}`,
-      },
-    })
+    fetch(`https://backendappmyhotel.vercel.app/option/category/${cat}`)
       .then((res) => res.json())
-      .then((res) => setState(res.categories));
-  }, []);
-  console.log(state);
+      .then(setState);
+  }, [cat]);
   return (
     <>
       {state.map((opc, index) => {

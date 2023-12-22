@@ -16,7 +16,7 @@ export default function SelectRoom({ category, floor }) {
   }
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_ADDR_API}/option/rooms/` + cat + "/" + flo, {
+    fetch(`${import.meta.env.VITE_ADDR_API}/rooms/`, {
       headers: {
         Authorization: `Bearer ${auth.isAuthenticated()}`,
       },

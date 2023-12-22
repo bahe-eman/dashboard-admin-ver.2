@@ -7,7 +7,6 @@ export default function SelectPayment({}) {
       .then((res) => res.json())
       .then(setState);
   }, []);
-  console.log(state);
   return (
     <>
       {state.map((opc, index) => {

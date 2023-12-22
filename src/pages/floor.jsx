@@ -35,7 +35,7 @@ export default function Floor() {
         <h1 className="p-4 font-raleway text-2xl font-semibold">List Rooms</h1>
         <form className="font-roboto px-4 mx-4 border rounded-lg bg-white max-md:text-sm overflow-auto">
           <div className="grid gap-5 place-items-start sm:flex justify-between m-4 ">
-            <Link to="/add-room">
+            <Link to="/add-floor">
               <button className="py-2 px-5 bg-blue-400 rounded-md text-xs text-white hover:bg-hover-blue">
                 <i className="ri-hotel-bed-line text-sm mr-2"></i>Add
               </button>

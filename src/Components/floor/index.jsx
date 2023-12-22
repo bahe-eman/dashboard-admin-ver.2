@@ -4,7 +4,8 @@ import auth from "../../utils/auth";
 export default function ListTable({ dataHotel }) {
   const Removefunction = (id) => {
     if (window.confirm("Do you want to remove?")) {
-      fetch(`${import.meta.env.VITE_ADDR_API}/rooms/${id}`, {
+      console.log(id);
+      fetch(`${import.meta.env.VITE_ADDR_API}/floor/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${auth.isAuthenticated()}`,
@@ -36,13 +37,13 @@ export default function ListTable({ dataHotel }) {
         >
           <thead className="text-xs text-gray-700 uppercase bg-gray-50">
             <tr>
-              <th className="border border-b-2 border-opacity-10 border-secondary-blue p-4 text-left">
+              <th className="border border-b-2 border-opacity-10 border-secondary-blue p-4 text-left w-[100px]">
                 No
               </th>
               <th className="border border-b-2 border-opacity-10 border-secondary-blue p-4 text-left min-w-[150px]">
                 Name
               </th>
-              <th className="border border-b-2 border-opacity-10 border-secondary-blue p-4 text-left">
+              <th className="border border-b-2 border-opacity-10 border-secondary-blue p-4 text-center">
                 Option
               </th>
             </tr>
