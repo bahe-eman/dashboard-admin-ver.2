@@ -1,6 +1,10 @@
 import Cookies from "js-cookie";
 
 const auth = {
+  storeId: (id) => {
+    return Cookies.set("id", id);
+  },
+
   isAuthenticated: () => {
     return Cookies.get("token");
   },
@@ -8,6 +12,7 @@ const auth = {
     return Cookies.set("token", token);
   },
   logout: () => {
+    Cookies.remove("id");
     Cookies.remove("user");
     Cookies.remove("level");
     return Cookies.remove("token");

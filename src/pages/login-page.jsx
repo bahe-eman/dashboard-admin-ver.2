@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 import toast from "react-hot-toast";
 import auth from "../utils/auth";
 import { useEffect, useState } from "react";
@@ -24,7 +25,17 @@ export default function LoginPage() {
       .catch(() => toast.error("database not conected..."));
   };
   useEffect(() => {
-    if (login) {
+    if (login && login.userData) {
+      fetch(`${import.meta.env.VITE_ADDR_API}/session`, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          id: uuidv4(),
+          name: login.userData.nameUser,
+          role: login.userData.roleUser,
+          jwt: login.token,
+        }),
+      });
       if (login.token) {
         auth.storeAuthCredential(login.token);
         auth.storeUser(login.userData.nameUser);
