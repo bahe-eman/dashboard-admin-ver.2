@@ -79,7 +79,9 @@ export default function CategoryPage() {
 
   useEffect(() => {
     if (response.message) {
-      toast.error("This didn't work.");
+      toast.error("This didn't work or time is out");
+      auth.logout();
+      navigate("/");
     }
     if (response.success) {
       setTimeout(() => {

@@ -4,30 +4,19 @@ const auth = {
   storeId: (id) => {
     return Cookies.set("id", id);
   },
+  isID: () => {
+    return Cookies.get("id");
+  },
 
   isAuthenticated: () => {
-    return Cookies.get("token");
+    return Cookies.get("jwt");
   },
-  storeAuthCredential: (token) => {
-    return Cookies.set("token", token);
+  storeAuthCredential: (jwt) => {
+    return Cookies.set("jwt", jwt);
   },
   logout: () => {
     Cookies.remove("id");
-    Cookies.remove("user");
-    Cookies.remove("level");
-    return Cookies.remove("token");
-  },
-  storeUser: (user) => {
-    return Cookies.set("user", user);
-  },
-  isUser: () => {
-    return Cookies.get("user");
-  },
-  storeRole: (role) => {
-    return Cookies.set("role", role);
-  },
-  isRole: () => {
-    return Cookies.get("role");
+    return Cookies.remove("jwt");
   },
 };
 

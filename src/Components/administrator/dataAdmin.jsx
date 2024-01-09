@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-import AdminDetail from "./adminDetail";
 import { Link } from "react-router-dom";
 import auth from "../../utils/auth";
 export default function DataAdmin({ dataAdmin }) {
@@ -11,7 +9,7 @@ export default function DataAdmin({ dataAdmin }) {
         },
         method: "DELETE",
       })
-        .then((res) => {
+        .then(() => {
           alert("Removed successfully.");
           window.location.reload();
         })
@@ -35,7 +33,7 @@ export default function DataAdmin({ dataAdmin }) {
               <td>
                 <div className="w-[190px]">
                   {/* <AdminDetail idData={product.idUser} /> */}
-                  {product.nameUser != "superadmin" && (
+                  {product.emailUser != "super@gmail.com" && (
                     <button
                       title="hapus"
                       onClick={() => {

@@ -26,26 +26,21 @@ export default function LoginPage() {
   };
   useEffect(() => {
     if (login && login.userData) {
+      const id = uuidv4();
       fetch(`${import.meta.env.VITE_ADDR_API}/session`, {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({
-          id: uuidv4(),
+          id: id,
           name: login.userData.nameUser,
           role: login.userData.roleUser,
           jwt: login.token,
         }),
       });
-      if (login.token) {
-        auth.storeAuthCredential(login.token);
-        auth.storeUser(login.userData.nameUser);
-        auth.storeRole(login.userData.roleUser);
-        if (auth.isRole() == 1) navigate("/administrator");
-        else navigate("/dashboard");
-      } else {
-        alert(login.message);
-        navigate("/");
-      }
+      auth.storeAuthCredential(login.token);
+      auth.storeId(id);
+      if (login.userData.roleUser == 1) navigate("/administrator");
+      else navigate("/dashboard");
     }
   }, [login]);
 
