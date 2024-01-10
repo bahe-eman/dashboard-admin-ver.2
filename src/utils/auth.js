@@ -1,28 +1,22 @@
 import Cookies from "js-cookie";
 
 const auth = {
-  isAuthenticated: () => {
-    return Cookies.get("token");
+  storeId: (id) => {
+    return Cookies.set("id", id);
   },
-  storeAuthCredential: (token) => {
-    return Cookies.set("token", token);
+  isID: () => {
+    return Cookies.get("id");
+  },
+
+  isAuthenticated: () => {
+    return Cookies.get("jwt");
+  },
+  storeAuthCredential: (jwt) => {
+    return Cookies.set("jwt", jwt);
   },
   logout: () => {
-    Cookies.remove("user");
-    Cookies.remove("level");
-    return Cookies.remove("token");
-  },
-  storeUser: (user) => {
-    return Cookies.set("user", user);
-  },
-  isUser: () => {
-    return Cookies.get("user");
-  },
-  storeRole: (role) => {
-    return Cookies.set("role", role);
-  },
-  isRole: () => {
-    return Cookies.get("role");
+    Cookies.remove("id");
+    return Cookies.remove("jwt");
   },
 };
 

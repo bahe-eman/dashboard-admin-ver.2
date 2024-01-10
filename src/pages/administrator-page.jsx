@@ -24,7 +24,7 @@ export default function AdministratorPage() {
     })
       .then((res) => res.json())
       .then(setState);
-  }, []);
+  }, [state]);
   return (
     <div className="w-full">
       <main className="bg-primary-gray grow overflow-y-auto">

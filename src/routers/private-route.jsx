@@ -6,9 +6,9 @@ import { useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
 
 function PrivateRoute() {
-  const user = useState(auth.isUser);
   const [superadmin, setSuperadmin] = useState(false);
   const [admin, setAdmin] = useState(false);
+  const [data, setData] = useState([]);
   const navigate = useNavigate();
   const logout = () => {
     auth.logout();
@@ -16,9 +16,26 @@ function PrivateRoute() {
   };
 
   useEffect(() => {
-    if (auth.isRole() == 1) setSuperadmin(true);
-    if (auth.isRole() == 2) setAdmin(true);
+    fetch(`${import.meta.env.VITE_ADDR_API}/session`, {
+      method: "GET",
+      headers: {
+        Authorization: `${auth.isID()}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => setData(res.data));
   }, []);
+
+  useEffect(() => {
+    if (data.role == 1) {
+      setSuperadmin(true);
+      setAdmin(false);
+    }
+    if (data.role == 2) {
+      setAdmin(true);
+      setSuperadmin(false);
+    }
+  }, [data]);
 
   const popUp = () => {
     document.getElementById("sidebar-overlay").classList.toggle("hidden");
@@ -26,7 +43,7 @@ function PrivateRoute() {
     document.getElementById("close-sidebar").classList.toggle("hidden");
   };
 
-  if (auth.isAuthenticated()) {
+  if (data) {
     return (
       <>
         <Toaster />
@@ -36,7 +53,7 @@ function PrivateRoute() {
               <img className="w-32 ml-4" src={logo} alt="logo" />
               <div className="flex items-center">
                 <Link to="/profile-user">
-                  <p className="sm:text-sm ml-8 mr-2 capitalize">{user}</p>
+                  <p className="sm:text-sm ml-8 mr-2 capitalize">{data.name}</p>
                 </Link>
                 <button
                   onClick={logout}
