@@ -11,8 +11,14 @@ export default function ListTable({ dataHotel }) {
           Authorization: `Bearer ${auth.isAuthenticated()}`,
         },
       })
-        .then(() => {
-          toast.success("Successfully!");
+        .then((res) => res.json())
+        .then((res) => {
+          console.log(res);
+          if (res.succes) {
+            toast.success("Success deleted");
+          } else {
+            toast.error("can't be deleted");
+          }
           setTimeout(() => {
             window.location.reload();
           }, 1000);
@@ -73,7 +79,7 @@ export default function ListTable({ dataHotel }) {
                           className="ri-delete-bin-line text-white"
                         ></i>
                       </button>
-                      <Link to={`/update-kamar/${floor.idFLoor}`}>
+                      <Link to={`/update-floor/${floor.idFLoor}`}>
                         <button
                           type="button"
                           title="edit"

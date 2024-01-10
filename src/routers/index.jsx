@@ -9,6 +9,7 @@ import ProfilePage from "../pages/profile-page";
 import ListKamarPage from "../pages/list-rooms-page";
 import Floor from "../pages/floor";
 import AddFloor from "../Components/floor/add";
+import UpdateFloor from "../Components/floor/update";
 import PesanKamarPage from "../pages/order-page";
 import CheckinKamarPage from "../pages/checkin-page";
 import DetailCheckin from "../pages/detail-check";
@@ -49,6 +50,7 @@ export default function Router() {
           <Route path="/list-rooms" element={<ListKamarPage />} />
           <Route path="/floor" element={<Floor />} />
           <Route path="/add-floor" element={<AddFloor />} />
+          <Route path="/update-floor" element={<UpdateFloor />} />
           <Route path="/add-room" element={<AddRoom />} />
           <Route path="/update-kamar/:id" element={<UpdateRoomForm />} />
           <Route path="/customer" element={<CustomerPage />} />

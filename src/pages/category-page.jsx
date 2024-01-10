@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 export default function CategoryPage() {
   const [response, setResponse] = useState([]);
   const [dataValue, setDataValue] = useState("all");
+  const [count, setCount] = useState(0);
   const navigate = useNavigate();
 
   const { isLoading } = useGetDataCheck(
@@ -20,7 +21,7 @@ export default function CategoryPage() {
       : toast.dismiss("loader");
   }, [isLoading]);
 
-  useState(() => {
+  useEffect(() => {
     fetch(`${import.meta.env.VITE_ADDR_API}/category`, {
       headers: {
         Authorization: `Bearer ${auth.isAuthenticated()}`,
@@ -30,8 +31,14 @@ export default function CategoryPage() {
       .then(setResponse)
       .catch(() => {
         toast.error("error database");
+        auth.logout();
+        navigate("/");
       });
-  }, [response]);
+  }, [count]);
+
+  setTimeout(() => {
+    setCount(count + 1);
+  }, 10000);
 
   const search = (value) => {
     setDataValue(value);

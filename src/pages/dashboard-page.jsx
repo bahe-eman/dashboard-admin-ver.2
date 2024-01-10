@@ -61,7 +61,7 @@ export default function Dashboard() {
   const [kamar, setKamar] = useState("");
 
   useEffect(() => {
-    fetch("https://backendappmyhotel.vercel.app/dashboard/information")
+    fetch(`${import.meta.env.VITE_ADDR_API}/dashboard/information`)
       .then((res) => {
         return res.json();
       })
@@ -84,16 +84,13 @@ export default function Dashboard() {
           </div>
 
           <div className="px-4 mx-auto grid place-items-center sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 text-slate-900 gap-10 z-10">
-            <div className="relative p-6 h-[115px] w-full sm:w-[240px] bg-[url('https://images.pexels.com/photos/3771827/pexels-photo-3771827.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')] bg-cover  shadow-xl rounded-lg flex">
+            <div className="relative p-6 h-[115px] w-full sm:w-[240px] bg-[url('https://images.pexels.com/photos/3771827/pexels-photo-3771827.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')] bg-cover shadow-xl rounded-lg flex">
               <div className="mb-2 text-center">
                 <p className="text-5xl text-cyan-300">{kamar}</p>
                 <p className="font-bold text-[20px] whitespace-nowrap">
                   Kamar Kosong
                 </p>
               </div>
-              <p className="absolute right-2 top-2">
-                <i className="ri-equalizer-line"></i>
-              </p>
             </div>
             <Link to="/checkin">
               <div className="relative p-6 h-[115px] w-full sm:w-[240px] bg-[url('https://images.pexels.com/photos/3688261/pexels-photo-3688261.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')] bg-cover shadow-xl rounded-lg flex">

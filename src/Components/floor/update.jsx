@@ -4,7 +4,7 @@ import auth from "../../utils/auth";
 import toast from "react-hot-toast";
 import SelectCategory from "../select-options/SelectCategory";
 import SelectFloor from "../select-options/SelectFloor";
-export default function AddFloor() {
+export default function UpdateFloor() {
   const [categoryId, setCategory] = useState("");
   const [floorId, setFloor] = useState("");
   const [nameFloor, setName] = useState("");
@@ -46,7 +46,7 @@ export default function AddFloor() {
           ></div>
           <div className="p-4 h-[calc(100vh-67.33px)]">
             <div>
-              <h1 className="text-2xl font-semibold">Add Floor</h1>
+              <h1 className="text-2xl font-semibold">Update Floor</h1>
             </div>
             <div className="p-4">
               <div className="p-6 bg-white border border-gray-200 rounded-lg shadow">

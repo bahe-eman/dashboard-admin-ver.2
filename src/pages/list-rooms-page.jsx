@@ -7,6 +7,7 @@ import auth from "../utils/auth";
 
 export default function ListKamarPage() {
   const [state, setState] = useState();
+  const [count, setCount] = useState(0);
   const { isLoading } = useGetDataCheck(
     `${import.meta.env.VITE_ADDR_API}/rooms`
   );
@@ -27,7 +28,10 @@ export default function ListKamarPage() {
       .catch(() => {
         toast.error("error database or session expire");
       });
-  }, []);
+  }, [count]);
+  setTimeout(() => {
+    setCount(count + 1);
+  }, 10000);
 
   return (
     <div className="w-full lg:w-[calc(100vw-220px)]">
