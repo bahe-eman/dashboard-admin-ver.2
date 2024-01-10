@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
+import auth from "../../utils/auth";
+import SelectCategory from "../select-options/SelectCategory";
+import SelectFloor from "../select-options/SelectFloor";
 export default function TambahKamarForm() {
   const [categoryId, setCategory] = useState("");
   const [floorId, setFloor] = useState("");
@@ -22,14 +24,17 @@ export default function TambahKamarForm() {
       statusId,
     };
 
-    fetch("http://localhost:2000/rooms", {
+    fetch(`${import.meta.env.VITE_ADDR_API}/rooms`, {
       method: "POST",
-      headers: { "content-type": "application/json" },
+      headers: {
+        "content-type": "application/json",
+        Authorization: `Bearer ${auth.isAuthenticated()}`,
+      },
       body: JSON.stringify(admData),
     })
       .then(() => {
         alert("Saved successfully.");
-        navigate("/list-kamar");
+        navigate("/list-rooms");
       })
       .catch((err) => {
         console.log(err.message);
@@ -56,31 +61,32 @@ export default function TambahKamarForm() {
                       <div className="md:col-span-3">
                         <label>Room Category</label>
                         <select
-                          onChange={(e) => setCategory(e.target.value)}
+                          name="categoryId"
                           required
+                          onChange={(e) => setCategory(e.target.value)}
                           className="h-10 border mt-1 rounded px-4 w-full bg-gray-0"
                         >
                           <option value={""}>--select--</option>
-                          <option value={1}>Admin</option>
-                          <option value={2}>Superadmin</option>
+                          <SelectCategory />
                         </select>
                       </div>
                       <div className="md:col-span-3">
                         <label>Floor</label>
                         <select
+                          name="floorId"
                           onChange={(e) => setFloor(e.target.value)}
                           className="h-10 border mt-1 rounded px-4 w-full bg-gray-0"
                         >
                           <option value={""}>--select--</option>
-                          <option value={1}>1</option>
-                          <option value={2}>2</option>
+                          <SelectFloor />
                         </select>
                       </div>
                       <div className="md:col-span-3">
                         <label>Name Room</label>
                         <input
-                          onChange={(e) => setName(e.target.value)}
+                          name="nameRoom"
                           required
+                          onChange={(e) => setName(e.target.value)}
                           type="text"
                           className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                           placeholder="Name Room"
@@ -88,21 +94,20 @@ export default function TambahKamarForm() {
                       </div>
                       <div className="md:col-span-3">
                         <label>Number Room</label>
-                        <select
+
+                        <input
                           onChange={(e) => setNumber(e.target.value)}
+                          type="number"
+                          name="numberRoom"
                           required
                           className="h-10 border mt-1 rounded px-4 w-full bg-gray-0"
-                        >
-                          <option value={""}>--select--</option>
-                          <option value={1}>1</option>
-                          <option value={2}>2</option>
-                          <option value={3}>3</option>
-                        </select>
+                        />
                       </div>
                       <div className="md:col-span-3">
                         <label>Description</label>
                         <input
                           onChange={(e) => setDesc(e.target.value)}
+                          name="descRoom"
                           required
                           type="text"
                           className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
@@ -113,12 +118,13 @@ export default function TambahKamarForm() {
                         <label>Status</label>
                         <select
                           onChange={(e) => setStatus(e.target.value)}
+                          name="statusId"
                           required
                           className="h-10 border mt-1 rounded px-4 w-full bg-gray-0"
                         >
                           <option value={""}>--select--</option>
-                          <option value={1}>Empty</option>
-                          <option value={2}>Booked</option>
+                          <option value={3}>Empty</option>
+                          <option value={4}>Booked</option>
                         </select>
                       </div>
                     </div>
@@ -128,6 +134,7 @@ export default function TambahKamarForm() {
                         <button
                           className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                           type="button"
+                          onClick={() => navigate("/list-rooms")}
                         >
                           Close
                         </button>

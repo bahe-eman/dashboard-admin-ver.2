@@ -12,7 +12,7 @@ export default function AdminAdd() {
   const [tlpUser, setPhone] = useState("");
   const [addressUser, setAddress] = useState("");
   const [statusUser, setStatus] = useState("Aktive");
-  const [levelUser, setLevel] = useState("");
+  const [roleUser, setRoleUser] = useState("");
   const handlesubmit = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -25,7 +25,7 @@ export default function AdminAdd() {
       tlpUser,
       addressUser,
       statusUser,
-      levelUser,
+      roleUser,
     };
     fetch(`${import.meta.env.VITE_ADDR_API}/users/add`, {
       method: "POST",
@@ -60,15 +60,15 @@ export default function AdminAdd() {
                   <form encType="multipart/form-data" onSubmit={handlesubmit}>
                     <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-6 m-5">
                       <div className="md:col-span-3">
-                        <label>Level</label>
+                        <label>Role</label>
                         <select
-                          name="levelUser"
-                          onChange={(e) => setLevel(e.target.value)}
+                          name="roleUser"
+                          onChange={(e) => setRoleUser(e.target.value)}
                           className="h-10 border mt-1 rounded px-4 w-full bg-gray-0"
                         >
                           <option value="0">--select level--</option>
-                          <option value={"1"}>Admin</option>
-                          <option value={"2"}>Superadmin</option>
+                          <option value={"1"}>Superadmin</option>
+                          <option value={"2"}>Admin</option>
                         </select>
                       </div>
                       <div className="md:col-span-3">

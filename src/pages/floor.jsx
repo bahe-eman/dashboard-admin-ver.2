@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
-import ListTable from "../Components/list-rooms/list-table";
+import ListTable from "../Components/floor";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import useGetDataCheck from "../hooks/useGetDataCheck";
 import auth from "../utils/auth";
 
-export default function ListKamarPage() {
+export default function Floor() {
   const [state, setState] = useState();
   const { isLoading } = useGetDataCheck(
-    `${import.meta.env.VITE_ADDR_API}/rooms`
+    `${import.meta.env.VITE_ADDR_API}/floor`
   );
   useEffect(() => {
     isLoading
@@ -17,7 +17,7 @@ export default function ListKamarPage() {
   }, [isLoading]);
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_ADDR_API}/rooms`, {
+    fetch(`${import.meta.env.VITE_ADDR_API}/floor`, {
       headers: {
         Authorization: `Bearer ${auth.isAuthenticated()}`,
       },
@@ -35,9 +35,9 @@ export default function ListKamarPage() {
         <h1 className="p-4 font-raleway text-2xl font-semibold">List Rooms</h1>
         <form className="font-roboto px-4 mx-4 border rounded-lg bg-white max-md:text-sm overflow-auto">
           <div className="grid gap-5 place-items-start sm:flex justify-between m-4 ">
-            <Link to="/add-room">
+            <Link to="/add-floor">
               <button className="py-2 px-5 bg-blue-400 rounded-md text-xs text-white hover:bg-hover-blue">
-                <i className="ri-hotel-bed-line text-sm mr-2"></i>Add Room
+                <i className="ri-hotel-bed-line text-sm mr-2"></i>Add
               </button>
             </Link>
           </div>

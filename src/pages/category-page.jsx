@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import auth from "../utils/auth";
+import toast from "react-hot-toast";
+import useGetDataCheck from "../hooks/useGetDataCheck";
 import TableCategory from "../Components/category/table-category";
 import SearchCategory from "../Components/category/search-category";
 import { useNavigate } from "react-router-dom";
@@ -7,8 +9,16 @@ import { useNavigate } from "react-router-dom";
 export default function CategoryPage() {
   const [response, setResponse] = useState([]);
   const [dataValue, setDataValue] = useState("all");
-  const [connected, setConnected] = useState(true);
   const navigate = useNavigate();
+
+  const { isLoading } = useGetDataCheck(
+    `${import.meta.env.VITE_ADDR_API}/category`
+  );
+  useEffect(() => {
+    isLoading
+      ? toast.loading("Loading...", { id: "loader" })
+      : toast.dismiss("loader");
+  }, [isLoading]);
 
   useState(() => {
     fetch(`${import.meta.env.VITE_ADDR_API}/category`, {
@@ -19,7 +29,7 @@ export default function CategoryPage() {
       .then((res) => res.json())
       .then(setResponse)
       .catch(() => {
-        setConnected(false);
+        toast.error("error database");
       });
   }, [response]);
 
@@ -32,7 +42,10 @@ export default function CategoryPage() {
         },
       })
         .then((res) => res.json())
-        .then(setResponse);
+        .then(setResponse)
+        .catch(() => {
+          toast.error("error database");
+        });
     } else {
       fetch(`${import.meta.env.VITE_ADDR_API}/category/search/${value}`, {
         headers: {
@@ -40,7 +53,10 @@ export default function CategoryPage() {
         },
       })
         .then((res) => res.json())
-        .then(setResponse);
+        .then(setResponse)
+        .catch(() => {
+          toast.error("error database");
+        });
     }
   };
 
@@ -52,7 +68,10 @@ export default function CategoryPage() {
       },
     })
       .then((res) => res.json())
-      .then(setResponse);
+      .then(setResponse)
+      .catch(() => {
+        toast.error("error database");
+      });
     setTimeout(() => {
       search(dataValue);
     }, 1000);
@@ -60,17 +79,14 @@ export default function CategoryPage() {
 
   useEffect(() => {
     if (response.message) {
-      alert(response.message);
-      navigate("/category");
+      toast.error("This didn't work.");
     }
     if (response.success) {
-      alert(response.success);
+      setTimeout(() => {
+        toast.success("Successfully!");
+      }, 1000);
     }
-    if (!connected) {
-      alert("database not conected...");
-      setConnected(true);
-    }
-  }, [response.message, response.success, connected]);
+  }, [response.message, response.success]);
 
   return (
     <div className="w-full lg:w-[calc(100vw-220px)]">

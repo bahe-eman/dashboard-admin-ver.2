@@ -1,13 +1,23 @@
-import Modal from "./modal";
-import DataAdmin from "./dataAdmin";
+import toast from "react-hot-toast";
+import useGetDataCheck from "../hooks/useGetDataCheck";
+import DataAdmin from "../Components/administrator/dataAdmin";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import auth from "../../utils/auth";
+import auth from "../utils/auth";
 
 export default function AdministratorPage() {
-  const [state, setState] = useState();
+  const [state, setState] = useState([]);
+  const { isLoading } = useGetDataCheck(
+    `${import.meta.env.VITE_ADDR_API}/users`
+  );
   useEffect(() => {
-    fetch("http://localhost:2000/users/", {
+    isLoading
+      ? toast.loading("Loading...", { id: "loader" })
+      : toast.dismiss("loader");
+  }, [isLoading]);
+
+  useEffect(() => {
+    fetch(`${import.meta.env.VITE_ADDR_API}/users`, {
       headers: {
         Authorization: `Bearer ${auth.isAuthenticated()}`,
       },

@@ -78,7 +78,7 @@ export default function TableCategory({ categories, deleteCategory }) {
                     </td>
                     <td className="p-4 border-secondary-gray border border-b-2 border-opacity-10">
                       <img
-                        src={`http://localhost:2000/${image}`}
+                        src={`${import.meta.env.VITE_ADDR_API}/${image}`}
                         className="h-32"
                         alt="image not found"
                       />

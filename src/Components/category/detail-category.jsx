@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useContext } from "react";
 import { global } from "../../context/context";
 import { useNavigate } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
+import useGetDataCheck from "../../hooks/useGetDataCheck";
 import auth from "../../utils/auth";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -9,11 +11,23 @@ import "slick-carousel/slick/slick-theme.css";
 
 export default function DetailCategory() {
   const [response, setResponse] = useState([]);
+  const [connected, setConnected] = useState(true);
   const navigate = useNavigate();
   const dataId = useContext(global).dataId;
+
   if (!dataId) {
     navigate("/category");
   }
+
+  const { isLoading } = useGetDataCheck(
+    `${import.meta.env.VITE_ADDR_API}/category/${dataId}`
+  );
+  useEffect(() => {
+    isLoading
+      ? toast.loading("Loading...", { id: "loader" })
+      : toast.dismiss("loader");
+  }, [isLoading]);
+
   useEffect(() => {
     fetch(`${import.meta.env.VITE_ADDR_API}/category/${dataId}`, {
       headers: {
@@ -21,7 +35,8 @@ export default function DetailCategory() {
       },
     })
       .then((res) => res.json())
-      .then(setResponse);
+      .then(setResponse)
+      .catch(() => setConnected(false));
   }, []);
 
   useEffect(() => {
@@ -30,7 +45,13 @@ export default function DetailCategory() {
       auth.logout();
       navigate("/");
     }
-  }, [response.message]);
+    if (!connected) {
+      alert("database not conected...");
+      auth.logout();
+      navigate("/");
+      setConnected(true);
+    }
+  }, [response.message, connected]);
 
   const sliderSettings = {
     dots: true,
@@ -45,6 +66,7 @@ export default function DetailCategory() {
   return (
     response.category && (
       <div className="w-full">
+        <Toaster />
         <main className="bg-primary-gray grow overflow-y-auto">
           <div className="p-4 h-[calc(100vh-67.33px)]">
             <div>

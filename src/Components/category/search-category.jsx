@@ -22,7 +22,7 @@ export default function SearchCategory({ search }) {
       <select
         onClick={searching}
         required
-        className="h-10 border mt-1 rounded-sm px-4 focus:border-blue-400 focus:outline-none"
+        className="h-10 border mt-1 rounded-sm px-4 focus:border-blue-400 focus:outline-none w-40"
       >
         <option>All</option>
         {res &&

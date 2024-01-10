@@ -30,20 +30,22 @@ export default function DataAdmin({ dataAdmin }) {
               <td>{index + 1}</td>
               <td>{product.nameUser}</td>
               <td>{product.emailUser}</td>
-              <td>{product.userLevel.nameLevel}</td>
+              <td>{product.userRole.nameLevel}</td>
               <td>{product.userStatus.nameStatus}</td>
               <td>
                 <div className="w-[190px]">
                   {/* <AdminDetail idData={product.idUser} /> */}
-                  <button
-                    title="hapus"
-                    onClick={() => {
-                      Removefunction(product.idUser);
-                    }}
-                    className="modal-hapusnya mr-1 py-1 px-5 bg-red-400 rounded-md hover:bg-hover-red"
-                  >
-                    <i className="ri-delete-bin-line text-white"></i>
-                  </button>
+                  {product.nameUser != "superadmin" && (
+                    <button
+                      title="hapus"
+                      onClick={() => {
+                        Removefunction(product.idUser);
+                      }}
+                      className="modal-hapusnya mr-1 py-1 px-5 bg-red-400 rounded-md hover:bg-hover-red"
+                    >
+                      <i className="ri-delete-bin-line text-white"></i>
+                    </button>
+                  )}
                   <Link to={"/update-admin/" + product.idUser}>
                     <button
                       type="button"

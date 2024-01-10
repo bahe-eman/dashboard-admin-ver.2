@@ -1,286 +1,46 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import useGetDataCheck from "../hooks/useGetDataCheck";
-import TableRowCheckIn from "../Components/TableRowCheckIn";
+import TableRowCheck from "../Components/check/TableRowCheck";
+import toast from "react-hot-toast";
+import auth from "../utils/auth";
+import { useNavigate } from "react-router-dom";
 
 export default function CheckinKamarPage() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [, setSelectedId] = useState(null);
-  const { data, isLoading } = useGetDataCheck(
-    "https://shy-pink-mussel-veil.cyclic.cloud/customer/not-check-out"
+  const navigate = useNavigate();
+  const { data, isLoading, refetch } = useGetDataCheck(
+    `${import.meta.env.VITE_ADDR_API}/check/in`
   );
-
-  const handleBtnClick = (id) => {
-    setIsModalOpen(true);
-    setSelectedId(id);
+  console.log(data)
+  const handleDetail = (id) => {
+    navigate(`/checkin/${id}`);
+  };
+  useEffect(() => {
+    isLoading
+      ? toast.loading("Loading...", { id: "loader" })
+      : toast.dismiss("loader");
+  }, [isLoading]);
+  const handleCheck = (id) => {
+    fetch(`${import.meta.env.VITE_ADDR_API}/check/in/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${auth.isAuthenticated()}`,
+      },
+    })
+      .then((res) => res.json())
+      .then(() => {
+        toast.success("check in success");
+        refetch();
+      });
   };
   return (
     <div className="w-full">
       <main className="bg-primary-gray grow overflow-y-auto">
-        <div
-          onClick={() => setIsModalOpen(false)}
-          className={`${
-            isModalOpen ? "" : "hidden"
-          } z-40 bg-black h-full w-full absolute top-0 left-0 opacity-90`}
-        ></div>
         <div className="p-2 h-[calc(100vh-67.33px)]">
           <div className="mb-4">
             <h1 className="text-2xl font-semibold">Check In</h1>
           </div>
           <div className="p-6 m-3 bg-white">
-            {isLoading ? (
-              <div className="grid place-items-center fixed inset-0 w-screen h-screen">
-                <h1 className="text-center text-zinc-500 text-7xl animate-bounce">
-                  Loading
-                </h1>
-              </div>
-            ) : (
-              <></>
-            )}
-            <div
-              id="modal"
-              className={`${
-                isModalOpen ? "" : "hidden"
-              } z-50 absolute bg-white inset-0 m-auto w-[90%] h-[550px] rounded  overflow-y-auto`}
-            >
-              <div className="flex justify-between px-2">
-                <h3 className="my-4 ml-2 text-2xl font-semibold">
-                  detail Check-in
-                </h3>
-                <button
-                  onClick={() => setIsModalOpen(false)}
-                  id="close-modal"
-                  className="text-3xl"
-                >
-                  <i className="ri-close-fill text-secondary-gray hover:text-secondary-blue"></i>
-                </button>
-              </div>
-              <div className="p-2">
-                <form action="#">
-                  <div className="p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                    <div className="flex flex-col">
-                      <label htmlFor="kategori" className="text-secondary-gray">
-                        Kategori
-                      </label>
-                      <select
-                        name="kategori"
-                        id=""
-                        className="w-full focus:outline-secondary-gray outline-secondary-gray p-2.5 rounded border border-gray-300"
-                      >
-                        <option>--pilih kategori--</option>
-                        <option>gold</option>
-                        <option>silver</option>
-                      </select>
-                    </div>
-                    <div className="flex flex-col">
-                      <label htmlFor="Lantai" className="text-secondary-gray">
-                        Lantai
-                      </label>
-                      <select
-                        name="Lantai"
-                        id=""
-                        className="w-full focus:outline-secondary-gray p-2.5 rounded border border-gray-300"
-                      >
-                        <option>--pilih Lantai--</option>
-                        <option>1</option>
-                        <option>2</option>
-                      </select>
-                    </div>
-                    <div className="flex flex-col">
-                      <label className="text-zinc-800" htmlFor="No kamar">
-                        No kamar
-                      </label>
-                      <select
-                        name="No kamar"
-                        id=""
-                        className="w-full focus:outline-secondary-gray p-2.5 rounded border border-gray-300"
-                      >
-                        <option>--pilih No kamar--</option>
-                        <option>1</option>
-                        <option>2</option>
-                      </select>
-                    </div>
-                    <div className="flex flex-col">
-                      <label className="text-zinc-800" htmlFor="Harga kamar">
-                        Harga kamar
-                      </label>
-                      <input
-                        type="text"
-                        name="Harga kamar"
-                        id="Harga kamar"
-                        className="focus:outline-secondary-gray p-2 rounded border border-gray-300"
-                      />
-                    </div>
-                    <div className="flex flex-col">
-                      <label
-                        className="text-zinc-800"
-                        htmlFor="Tanggal check-in"
-                      >
-                        Tanggal check-in
-                      </label>
-                      <input
-                        type="text"
-                        name="Tanggal check-in"
-                        id="Tanggal checkin"
-                        className="focus:outline-secondary-gray p-2 rounded border border-gray-300"
-                      />
-                    </div>
-                    <div className="flex flex-col">
-                      <label className="text-zinc-800" htmlFor="jam check-in">
-                        jam check-in
-                      </label>
-                      <input
-                        type="text"
-                        name="jam check-in"
-                        id="jam check-in"
-                        className="focus:outline-secondary-gray p-2 rounded border border-gray-300"
-                      />
-                    </div>
-                    <div className="flex flex-col">
-                      <label
-                        className="text-zinc-800"
-                        htmlFor="Tanggal Check-out"
-                      >
-                        Tanggal Check-out
-                      </label>
-                      <input
-                        type="text"
-                        name="Tanggal Check-out"
-                        id="Tanggal Check-out"
-                        className="focus:outline-secondary-gray p-2 rounded border border-gray-300"
-                      />
-                    </div>
-                    <div className="flex flex-col">
-                      <label className="text-zinc-800" htmlFor="Jam Check-out">
-                        Jam Check-out
-                      </label>
-                      <input
-                        type="text"
-                        name="Jam Check-out"
-                        id="Jam Check-out"
-                        className="focus:outline-secondary-gray p-2 rounded border border-gray-300"
-                      />
-                    </div>
-                    <div className="flex flex-col">
-                      <label className="text-zinc-800" htmlFor="jumlah-hari">
-                        Jumlah hari
-                      </label>
-                      <input
-                        type="text"
-                        name="jumlah-hari"
-                        id="jumlah-hari"
-                        className="focus:outline-secondary-gray p-2 rounded border border-gray-300"
-                      />
-                    </div>
-                  </div>
-                  <div className="mx-2">
-                    <h3 className="font-semibold">Custummer</h3>
-                  </div>
-                  <div className="p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                    <div className="flex flex-col">
-                      <label className="text-zinc-800" htmlFor="nik">
-                        Nik
-                      </label>
-                      <input
-                        type="text"
-                        name="nik"
-                        id="nik"
-                        className="focus:outline-secondary-gray p-2 rounded border border-gray-300"
-                      />
-                    </div>
-                    <div className="flex flex-col">
-                      <label className="text-zinc-800" htmlFor="nama-lengkap">
-                        Nama lengkap
-                      </label>
-                      <input
-                        type="text"
-                        name="nama-lengkap"
-                        id="nama-lengkap"
-                        className="focus:outline-secondary-gray p-2 rounded border border-gray-300"
-                      />
-                    </div>
-                    <div className="flex flex-col">
-                      <label className="text-zinc-800" htmlFor="no-telepon">
-                        No telepon
-                      </label>
-                      <input
-                        type="text"
-                        name="no-telepon"
-                        id="no-telepon"
-                        className="focus:outline-secondary-gray p-2 rounded border border-gray-300"
-                      />
-                    </div>
-                    <div className="flex flex-col">
-                      <label className="text-zinc-800" htmlFor="email">
-                        Email
-                      </label>
-                      <input
-                        type="text"
-                        name="email"
-                        id="email"
-                        className="focus:outline-secondary-gray p-2 rounded border border-gray-300"
-                      />
-                    </div>
-                    <div className="flex flex-col">
-                      <label className="text-zinc-800" htmlFor="alamat">
-                        Alamat
-                      </label>
-                      <input
-                        type="text"
-                        name="alamat"
-                        id="alamat"
-                        className="focus:outline-secondary-gray p-2 rounded border border-gray-300"
-                      />
-                    </div>
-                  </div>
-                  <div className="p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                    <div className="flex flex-col">
-                      <label
-                        className="text-zinc-800"
-                        htmlFor="untuk-berapa-orang"
-                      >
-                        Untuk berapa orang
-                      </label>
-                      <input
-                        type="text"
-                        name="untuk-berapa-orang"
-                        id="untuk-berapa-orang"
-                        className="focus:outline-secondary-gray p-2 rounded border border-gray-300"
-                      />
-                    </div>
-                    <div className="flex flex-col">
-                      <label
-                        className="text-zinc-800"
-                        htmlFor="metode-pembayaran"
-                      >
-                        Metode pembayaran
-                      </label>
-                      <input
-                        type="text"
-                        name="metode-pembayaran"
-                        id="metode-pembayaran"
-                        className="focus:outline-secondary-gray p-2 rounded border border-gray-300"
-                      />
-                    </div>
-                    <div className="flex flex-col">
-                      <label className="text-zinc-800" htmlFor="jumlah-bayar">
-                        Jumlah bayar
-                      </label>
-                      <input
-                        type="text"
-                        name="jumlah-bayar"
-                        id="jumlah-bayar"
-                        className="focus:outline-secondary-gray p-2 rounded border border-gray-300"
-                      />
-                    </div>
-                  </div>
-                  <div className="flex justify-end p-4">
-                    <button className="bg-secondary-blue text-white py-2 px-4 rounded">
-                      check-in
-                    </button>
-                  </div>
-                </form>
-              </div>
-            </div>
             <div className="flex p-2 mb-2 justify-end w-full">
               <div>
                 <input
@@ -318,20 +78,23 @@ export default function CheckinKamarPage() {
               </thead>
               <tbody>
                 {data ? (
-                  data.filterCustomers.map((item, index) => (
-                    <TableRowCheckIn
-                      key={item.id}
+                  data.data.map((item, index) => (
+                    <TableRowCheck
+                      key={item.idTransaction + index}
                       no={index + 1}
-                      idRegistrasi={item.id}
-                      nik={item.nik}
-                      nama={item.name}
-                      noKamar={item.noKamar}
-                      tanggalCheckin={item.tanggalCheckIn}
-                      onBtnClick={handleBtnClick}
+                      idRegistrasi={item.idTransaction}
+                      nik={item.customer.nikCustomer}
+                      nama={item.customer.nameCustomer}
+                      noKamar={item.room.numberRoom}
+                      tanggalCheck={item.checkIn}
+                      btnDetail={() => handleDetail(item.idTransaction)}
+                      btnCheck={() => handleCheck(item?.idTransaction)}
                     />
                   ))
                 ) : (
-                  <></>
+                  <tr>
+                    <td colSpan="6">No check-in data available</td>
+                  </tr>
                 )}
               </tbody>
             </table>

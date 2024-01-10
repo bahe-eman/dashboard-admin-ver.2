@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -9,6 +9,7 @@ import {
   Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
+import { Link } from "react-router-dom";
 
 ChartJS.register(
   CategoryScale,
@@ -55,6 +56,25 @@ const data = {
 };
 
 export default function Dashboard() {
+  const [checkin, setCheckin] = useState("");
+  const [checkout, setCheckOut] = useState("");
+  const [kamar, setKamar] = useState("");
+
+  useEffect(() => {
+    fetch("https://backendappmyhotel.vercel.app/dashboard/information")
+      .then((res) => {
+        return res.json();
+      })
+      .then((resp) => {
+        setCheckin(resp.checkIn);
+        setCheckOut(resp.checkOut);
+        setKamar(resp.room);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }, []);
+
   return (
     <div className="w-full">
       <main className="bg-primary-gray grow overflow-y-auto">
@@ -62,47 +82,57 @@ export default function Dashboard() {
           <div>
             <h1 className="text-2xl font-semibold ml-4 my-6">Dashboard</h1>
           </div>
+
           <div className="px-4 mx-auto grid place-items-center sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 text-slate-900 gap-10 z-10">
             <div className="relative p-6 h-[115px] w-full sm:w-[240px] bg-[url('https://images.pexels.com/photos/3771827/pexels-photo-3771827.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')] bg-cover  shadow-xl rounded-lg flex">
               <div className="mb-2 text-center">
-                <p className="text-5xl text-cyan-500">20</p>
-                <p className="font-semibold whitespace-nowrap">Kamar Terisi</p>
-              </div>
-              <p className="absolute right-2 top-2">
-                <i className="ri-equalizer-line"></i>
-              </p>
-            </div>
-            <div className="relative p-6 h-[115px] w-full sm:w-[240px] bg-[url('https://images.pexels.com/photos/3688261/pexels-photo-3688261.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')] bg-cover shadow-xl rounded-lg flex">
-              <div className="mb-2 text-center">
-                <p className="text-5xl text-cyan-500">20</p>
-                <p className="font-semibold whitespace-nowrap">Kamar Kosong</p>
-              </div>
-              <p className="absolute right-2 top-2">
-                <i className="ri-equalizer-line"></i>
-              </p>
-            </div>
-            <div className="relative p-6 h-[115px] w-full sm:w-[240px] bg-[url('https://images.pexels.com/photos/1008155/pexels-photo-1008155.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')] bg-cover shadow-xl rounded-lg flex">
-              <div className="mb-2 text-center">
-                <p className="text-5xl text-cyan-500">10</p>
-                <p className="font-bold whitespace-nowrap text-hover-red">
-                  Check Out Hari Ini
+                <p className="text-5xl text-cyan-300">{kamar}</p>
+                <p className="font-bold text-[20px] whitespace-nowrap">
+                  Kamar Kosong
                 </p>
               </div>
               <p className="absolute right-2 top-2">
                 <i className="ri-equalizer-line"></i>
               </p>
             </div>
-            <div className="relative p-6 h-[115px] w-full sm:w-[240px] bg-[url('https://images.pexels.com/photos/3770238/pexels-photo-3770238.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')] bg-cover shadow-xl rounded-lg flex md:col-start-2 xl:col-start-4">
-              <div className="mb-2 text-center">
-                <p className="text-5xl text-cyan-500">12</p>
-                <p className="font-semibold whitespace-nowrap text-white">
-                  Pesan Kamar
+            <Link to="/checkin">
+              <div className="relative p-6 h-[115px] w-full sm:w-[240px] bg-[url('https://images.pexels.com/photos/3688261/pexels-photo-3688261.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')] bg-cover shadow-xl rounded-lg flex">
+                <div className="mb-2 text-center">
+                  <p className="text-5xl text-cyan-300">{checkin}</p>
+                  <p className="font-bold text-[20px] whitespace-nowrap">
+                    Check In
+                  </p>
+                </div>
+                <p className="absolute right-2 top-2">
+                  <i className="ri-equalizer-line"></i>
                 </p>
               </div>
-              <p className="absolute right-2 top-2">
-                <i className="ri-equalizer-line"></i>
-              </p>
-            </div>
+            </Link>
+            <Link to="/checkout">
+              <div className="relative p-6 h-[115px] w-full sm:w-[240px] bg-[url('https://images.pexels.com/photos/1008155/pexels-photo-1008155.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')] bg-cover shadow-xl rounded-lg flex">
+                <div className="mb-2 text-center">
+                  <p className="text-5xl text-cyan-300">{checkout}</p>
+                  <p className="font-bold text-[20px] whitespace-nowrap text-white">
+                    Check Out
+                  </p>
+                </div>
+                <p className="absolute right-2 top-2">
+                  <i className="ri-equalizer-line"></i>
+                </p>
+              </div>
+            </Link>
+            <Link to="/order">
+              <div className="relative p-6 h-[115px] w-full sm:w-[240px] bg-[url('https://images.pexels.com/photos/3770238/pexels-photo-3770238.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')] bg-cover shadow-xl rounded-lg flex md:col-start-2 xl:col-start-4">
+                <div className="mb-2 text-center">
+                  <p className="font-bold text-[20px] whitespace-nowrap text-primary">
+                    Pesan Kamar
+                  </p>
+                </div>
+                <p className="absolute right-2 top-2">
+                  <i className="ri-equalizer-line"></i>
+                </p>
+              </div>
+            </Link>
           </div>
           <div
             className="
@@ -114,7 +144,8 @@ export default function Dashboard() {
           w-fit
           mt-8
           min-[1280px]:mt-12
-          ">
+          "
+          >
             <h4
               className="
             text-zinc-800
@@ -124,7 +155,8 @@ export default function Dashboard() {
             font-semibold 
             mb-2
             min-[768px]:mb-4
-            ">
+            "
+            >
               Transaksi Tahun ini
             </h4>
             <div
@@ -144,7 +176,8 @@ export default function Dashboard() {
             min-[425px]:h-[200px]
             min-[768px]:h-[350px]
             min-[1920px]:h-[500px]
-            ">
+            "
+            >
               <Bar
                 className="justify-center"
                 options={options}

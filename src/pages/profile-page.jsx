@@ -24,7 +24,7 @@ export default function ProfilePage() {
                         </div>
                       </div>
                       <div className="md:col-span-3">
-                      <div className="flex items-center">
+                        <div className="flex items-center">
                           <i className="ri-customer-service-2-fill text-4xl flex items-center">
                             <span className="ml-2 border-collapse focus:outline-none font-raleway text-lg text-black">
                               021-1239875
@@ -33,7 +33,7 @@ export default function ProfilePage() {
                         </div>
                       </div>
                       <div className="md:col-span-3">
-                      <div className="flex items-center">
+                        <div className="flex items-center">
                           <i className="ri-mail-check-fill text-4xl text-third-blue flex items-center">
                             <span className="ml-2 border-collapse focus:outline-none font-raleway text-lg text-black">
                               contact@myhotel.group
@@ -42,7 +42,7 @@ export default function ProfilePage() {
                         </div>
                       </div>
                       <div className="md:col-span-3">
-                      <div className="flex items-center">
+                        <div className="flex items-center">
                           <i className="ri-map-pin-fill text-4xl text-hover-red flex items-center">
                             <span className="ml-2 border-collapse focus:outline-none font-raleway text-lg text-black">
                               Jl. Soekarno-Hatta 2023 Yogyakarta, Indonesia
@@ -51,27 +51,27 @@ export default function ProfilePage() {
                         </div>
                       </div>
                       <div className="md:col-span-3">
-                      <div className="flex items-center">
+                        <div className="flex items-center">
                           <i className="ri-global-line text-4xl text-third-blue flex items-center">
                             <span className="ml-2 border-collapse focus:outline-none font-raleway text-lg text-black">
-                            <Link to="https://client-dashboard-hazel.vercel.app/">
+                              <Link to="https://client-dashboard-hazel.vercel.app/">
                                 https://client-dashboard-hazel.vercel.app/
-                            </Link>
+                              </Link>
                             </span>
                           </i>
                         </div>
                       </div>
                       <div className="md:col-span-3">
-                      <div className="flex items-center">
+                        <div className="flex items-center">
                           <i className="ri-instagram-fill text-4xl text-pink-400 flex items-center">
                             <span className="ml-2 border-collapse focus:outline-none font-raleway text-lg text-black">
-                            My Hotel
+                              My Hotel
                             </span>
                           </i>
                         </div>
                       </div>
                       <div className="md:col-span-3">
-                      <div className="flex items-center">
+                        <div className="flex items-center">
                           <i className="ri-facebook-circle-fill text-4xl text-third-blue flex items-center">
                             <span className="ml-2 border-collapse focus:outline-none font-raleway text-lg text-black">
                               My Hotel
@@ -80,7 +80,7 @@ export default function ProfilePage() {
                         </div>
                       </div>
                       <div className="md:col-span-3">
-                      <div className="flex items-center">
+                        <div className="flex items-center">
                           <i className="ri-twitter-fill text-4xl text-third-blue flex items-center">
                             <span className="ml-2 border-collapse focus:outline-none font-raleway text-lg text-black">
                               My Hotel
